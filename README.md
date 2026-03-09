@@ -2,8 +2,6 @@
 
 > Plateforme de streaming vidéo sécurisée, 100% serverless, déployée sur AWS.
 
-![Architecture](./docs/architecture-diagram.png)
-
 ## Présentation
 
 Cette application permet à des utilisateurs authentifiés de **téléverser**, **consulter** et **lire** leurs vidéos directement depuis un site web statique. Le tout repose sur une architecture **serverless moderne** entièrement déployée sur **AWS**.
