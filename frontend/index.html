@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureStream — Plateforme de Streaming Vidéo</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="#ff9900"/>
+                        <polygon points="12,8 12,24 24,16" fill="white"/>
+                    </svg>
+                    <span class="logo-text">SecureStream</span>
+                </div>
+                <nav class="nav" id="nav-auth">
+                    <button class="btn btn-primary" id="btn-login" onclick="Auth.login()">
+                        Se connecter
+                    </button>
+                </nav>
+                <nav class="nav" id="nav-user" style="display: none;">
+                    <span class="user-email" id="user-email"></span>
+                    <button class="btn btn-outline" onclick="Auth.logout()">
+                        Déconnexion
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero (non-authenticated) -->
+        <section class="hero" id="section-hero">
+            <div class="hero-content">
+                <h1>Streaming vidéo <span class="highlight">sécurisé</span></h1>
+                <p>Téléversez, gérez et lisez vos vidéos en toute sécurité. Architecture serverless sur AWS.</p>
+                <button class="btn btn-primary btn-large" onclick="Auth.login()">
+                    Commencer gratuitement
+                </button>
+            </div>
+            <div class="hero-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Authentification OAuth2</h3>
+                    <p>Connexion sécurisée via Amazon Cognito</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Upload rapide</h3>
+                    <p>URLs pré-signées pour un upload direct vers S3</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>CDN global</h3>
+                    <p>Distribution via CloudFront pour une lecture fluide</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard (authenticated) -->
+        <main class="dashboard" id="section-dashboard" style="display: none;">
+            <!-- Upload zone -->
+            <section class="upload-section">
+                <div class="upload-zone" id="upload-zone">
+                    <div class="upload-icon">📁</div>
+                    <p class="upload-text">Glissez-déposez votre vidéo ici</p>
+                    <p class="upload-subtext">ou cliquez pour sélectionner un fichier</p>
+                    <p class="upload-formats">MP4, WebM, OGG — Max 500 Mo</p>
+                    <input type="file" id="file-input" accept="video/*" hidden>
+                </div>
+                <!-- Upload progress -->
+                <div class="upload-progress" id="upload-progress" style="display: none;">
+                    <div class="progress-info">
+                        <span id="upload-filename"></span>
+                        <span id="upload-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p class="upload-status" id="upload-status">Préparation...</p>
+                </div>
+            </section>
+
+            <!-- Video list -->
+            <section class="videos-section">
+                <h2>Mes vidéos</h2>
+                <div class="videos-grid" id="videos-grid">
+                    <div class="loading" id="videos-loading">
+                        <div class="spinner"></div>
+                        <p>Chargement de vos vidéos...</p>
+                    </div>
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <div class="empty-icon">🎥</div>
+                        <p>Aucune vidéo pour l'instant</p>
+                        <p class="empty-subtext">Téléversez votre première vidéo ci-dessus !</p>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="btn btn-outline" id="btn-prev" onclick="App.prevPage()">← Précédent</button>
+                    <span id="page-info"></span>
+                    <button class="btn btn-outline" id="btn-next" onclick="App.nextPage()">Suivant →</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Video Player Modal -->
+        <div class="modal" id="video-modal" style="display: none;">
+            <div class="modal-overlay" onclick="Player.close()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="Player.close()">✕</button>
+                <video id="video-player" controls autoplay>
+                    <source id="video-source" src="" type="">
+                    Votre navigateur ne supporte pas la lecture vidéo.
+                </video>
+                <div class="modal-info">
+                    <h3 id="video-title"></h3>
+                    <p id="video-meta"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>SecureStream — Architecture serverless sur AWS</p>
+            <p class="footer-tech">S3 • CloudFront • Cognito • API Gateway • Lambda • RDS</p>
+        </footer>
+    </div>
+
+    <script src="js/auth.mjs" type="module"></script>
+    <script src="js/api.mjs" type="module"></script>
+    <script src="js/player.mjs" type="module"></script>
+    <script src="js/app.mjs" type="module"></script>
+</body>
+</html>

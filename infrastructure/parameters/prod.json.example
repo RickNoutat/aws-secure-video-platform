@@ -1,0 +1,11 @@
+{
+  "Parameters": {
+    "Environment": "prod",
+    "ProjectName": "secure-video-platform",
+    "DBInstanceClass": "db.t3.small",
+    "DBName": "videodb",
+    "DBMasterUsername": "admin",
+    "DBMasterPassword": "CHANGE_ME_STRONG_PASSWORD",
+    "CognitoDomainPrefix": "my-video-platform"
+  }
+}

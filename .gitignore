@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build
+.aws-sam/
+.build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SAM
+samconfig.toml
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Parameters with secrets
+infrastructure/parameters/dev.json
+infrastructure/parameters/prod.json
